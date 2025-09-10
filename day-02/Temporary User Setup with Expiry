@@ -1,4 +1,4 @@
-# Day 2: Temporary User Setup with Expiry
+# Task: Temporary User Setup with Expiry
 
 ## Objective
 Create a temporary user account named `yousuf` on App Server 1 (stapp01.stratos.xfusioncorp.com) in the Stratos Datacenter. The account should automatically expire on 2024-01-28, ensuring limited access for a developer working on the Nautilus project.
