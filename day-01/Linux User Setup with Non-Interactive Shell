@@ -1,0 +1,53 @@
+Task: Create a user named 'mariyam' with a non-interactive shell on App Server 2
+
+Server Details:
+---------------
+Server Name: stapp02
+IP Address: 172.16.238.11
+Hostname: stapp02.stratos.xfusioncorp.com
+Username: steve
+Password: Am3ric@
+
+Steps:
+------
+
+1. Open your terminal.
+
+2. Connect to App Server 2 using SSH:
+   Command:
+   ssh steve@stapp02
+   When prompted, enter the password: Am3ric@
+
+3. Switch to the root user to perform administrative tasks:
+   Command:
+   sudo su -
+   Enter the password again if prompted.
+
+4. Check if the user 'mariyam' already exists:
+   Command:
+   cat /etc/passwd | grep mariyam
+   If no output appears, the user does not exist.
+
+5. Create the user 'mariyam' with a non-interactive shell:
+   Command:
+   useradd mariyam --shell /sbin/nologin
+
+6. Confirm the user was created successfully:
+   Command:
+   cat /etc/passwd | grep mariyam
+   Expected output:
+   mariyam:x:1002:1002::/home/mariyam:/sbin/nologin
+
+Explanation:
+------------
+- The 'useradd' command creates a new user.
+- The '--shell /sbin/nologin' option sets the shell to a non-interactive one, preventing login access.
+- This setup is useful for service accounts or users that should not have terminal access.
+
+Notes:
+------
+- You can also use '/bin/false' instead of '/sbin/nologin' for similar behavior.
+- Always verify user creation using the /etc/passwd file.
+- Make sure you have root privileges to create users.
+
+
