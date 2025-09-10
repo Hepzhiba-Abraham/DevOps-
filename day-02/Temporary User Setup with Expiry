@@ -1,0 +1,116 @@
+# Day 2: Temporary User Setup with Expiry
+
+## Objective
+Create a temporary user account named `yousuf` on App Server 1 (stapp01.stratos.xfusioncorp.com) in the Stratos Datacenter. The account should automatically expire on 2024-01-28, ensuring limited access for a developer working on the Nautilus project.
+
+---
+
+## Infrastructure Details
+
+Server Name: stapp01  
+IP Address: 172.16.238.10  
+Hostname: stapp01.stratos.xfusioncorp.com  
+User: tony  
+Password: Ir0nM@n  
+Purpose: Nautilus App 1
+
+---
+
+## Prerequisites
+
+Before you begin:
+- You must have access to the jump host or terminal to SSH into stapp01.
+- You need the login credentials for the server (tony / Ir0nM@n).
+- Basic familiarity with Linux commands is helpful.
+
+---
+
+## Step-by-Step Instructions
+
+### 1. Connect to App Server 1 via SSH
+
+Open your terminal and run:
+```
+ssh tony@stapp01
+```
+
+If prompted:
+```
+The authenticity of host 'stapp01 (172.16.238.10)' can't be established...
+Are you sure you want to continue connecting (yes/no)? yes
+```
+
+Type `yes` and press Enter. Then enter the password:
+```
+Ir0nM@n
+```
+
+---
+
+### 2. Switch to the Root User
+
+Once logged in, elevate your privileges:
+```
+sudo su -
+```
+
+Enter tony's password again when prompted.
+
+---
+
+### 3. Check if the User Already Exists
+
+Run:
+```
+cat /etc/passwd | grep yousuf
+```
+
+If there's no output, the user doesn't exist yet.
+
+---
+
+### 4. Create the Temporary User
+
+Run:
+```
+sudo useradd -e 2024-01-28 yousuf
+```
+
+This creates the user `yousuf` and sets the account to expire on January 28, 2024.
+
+---
+
+### 5. Confirm the Expiry Date
+
+Run:
+```
+sudo chage -l yousuf
+```
+
+Expected output:
+```
+Account expires : Jan 28, 2024
+```
+
+---
+
+## Outcome
+
+The user `yousuf` has been successfully created on stapp01 with an expiry date of 2024-01-28. This ensures temporary access for the duration of the assignment.
+
+---
+
+## Security Tips
+
+- Use lowercase usernames for consistency.
+- Always set expiry dates for temporary users.
+- Use `sudo` carefully—root access gives full control.
+- Monitor and remove accounts when no longer needed.
+
+---
+
+## Notes
+
+- No password was set for `yousuf`; configure access method separately (e.g., SSH key).
+- Consider automating cleanup of expired accounts if needed.
+```
